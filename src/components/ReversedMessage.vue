@@ -1,5 +1,5 @@
 <template>
-  <div>{{ reversedMessage }}</div>
+  <div>Reversed Message: {{ reversedMessage }}</div>
   <div>Length of Reversed Message: {{ reversedMessageLength }}</div>
 </template>
 
