@@ -1,47 +1,52 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="container">
+    <Message
+      :initial-message="message"
+      @message-changed="handleMessageChange"
+    />
+    <Button @button-clicked="handleButtonClick" />
+    <ReversedMessage :reversed-message="reversedMessage" />
+    <button @click="updateMessage">Update Message</button>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script>
+import Message from "./components/Message.vue";
+import Button from "./components/Button.vue";
+import ReversedMessage from "./components/ReversedMessage.vue";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+export default {
+  components: {
+    Message,
+    Button,
+    ReversedMessage,
+  },
+  data() {
+    return {
+      message: "Hello Vue!",
+      reversedMessage: "",
+    };
+  },
+  methods: {
+    handleMessageChange(newMessage) {
+      this.message = newMessage;
+    },
+    handleButtonClick() {
+      this.reversedMessage = this.message.split("").reverse().join("");
+    },
+    updateMessage() {
+      console.log("Updating message", this.message);
+      this.message = "Updated message";
+      console.log("Message updated", this.message);
+    },
+  },
+};
+</script>
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
