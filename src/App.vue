@@ -35,9 +35,7 @@ export default {
       this.reversedMessage = this.message.split("").reverse().join("");
     },
     updateMessage() {
-      console.log("Updating message", this.message);
       this.message = "Updated message";
-      console.log("Message updated", this.message);
     },
   },
 };
